@@ -6,10 +6,11 @@
   "password": "parolamiz-sevgi",
   "database": "interview-gjg",
 
-  "entities": ["src/entity/*.ts"],
-  "subscribers": ["src/subscriber/*.ts"],
+  "entities": ["dist/entity/*.js"],
+  "subscribers": ["dist/subscriber/*.js"],
 
-  "migrations": ["src/migration/*.ts"],
+  "migrations": ["dist/migration/*.js"],
+
   "cli": {
     "migrationsDir": "src/migration"
   }
