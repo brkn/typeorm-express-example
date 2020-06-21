@@ -8,7 +8,7 @@ import {
   applyRoutes,
 } from "./utils";
 import middlewares from "./middlewares";
-import routes from "./routes";
+import {routes} from "./routes";
 import errorHandlers from "./middlewares/error-handlers";
 
 process.on("uncaughtException", (e) => {

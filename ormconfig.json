@@ -1,0 +1,16 @@
+{
+  "type": "postgres",
+  "host": "localhost",
+  "port": 5432,
+  "username": "gjg",
+  "password": "parolamiz-sevgi",
+  "database": "interview-gjg",
+
+  "entities": ["src/entity/*.ts"],
+  "subscribers": ["src/subscriber/*.ts"],
+
+  "migrations": ["src/migration/*.ts"],
+  "cli": {
+    "migrationsDir": "src/migration"
+  }
+}
