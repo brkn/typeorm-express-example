@@ -16,4 +16,18 @@ const create: Route = {
   },
 };
 
-export const userRoutes = [create];
+const get: Route = {
+  path: "/user/profile/:user_id",
+  method: "get",
+  handler: async (
+    req: Request,
+    res: Response,
+  ) => {
+    userController.get(req, res);
+  },
+};
+
+export const userRoutes = [
+  create,
+  get
+];

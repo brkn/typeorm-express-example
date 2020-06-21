@@ -39,6 +39,31 @@ async function create(
   }
 }
 
+async function get(req: Request, res: Response) {
+  const {user_id} = req.params;
+
+  const userRepository = getRepository(Player);
+  const user = await userRepository.findOne({
+    where: {user_id},
+  });
+  if (!user) {
+    res.status(404).send({
+      Error: "This user doesn't exists",
+    });
+    return;
+  }
+
+  const {display_name, country, points} = user;
+
+  res.status(200).json({
+    user_id,
+    display_name,
+    country,
+    points,
+  });
+}
+
 export const userController = {
   create,
+  get,
 };

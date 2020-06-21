@@ -23,7 +23,7 @@ async function filterByCountry(
   req: Request,
   res: Response,
 ) {
-  const countryCode = req.params.country_code;
+  const {country_code} = req.params;
 
   const playerRepo = getRepository(Player);
   const players = await playerRepo
@@ -32,7 +32,7 @@ async function filterByCountry(
       "user_id, display_name, country, points, RANK() OVER (ORDER BY points DESC) AS rank",
     )
     .where("player.country = :country", {
-      country: countryCode,
+      country: country_code,
     })
     .orderBy("rank", "DESC")
     .getMany();
