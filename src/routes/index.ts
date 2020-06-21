@@ -1,5 +1,7 @@
-import {
-  leaderboardRoutes,
-} from "./leaderboard";
+import {leaderboardRoutes} from "./leaderboard";
+import {userRoutes} from "./user";
 
-export const routes = [...leaderboardRoutes];
+export const routes = [
+  ...leaderboardRoutes,
+  ...userRoutes,
+];

@@ -7,7 +7,7 @@ import {
 } from "typeorm";
 import {Min} from "class-validator";
 
-interface PlayerParams {
+export interface PlayerParams {
   user_id: string;
   display_name: string;
   country?: string;
