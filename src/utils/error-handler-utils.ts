@@ -18,9 +18,9 @@ export const clientError = (
   if (err instanceof HTTPClientError) {
     console.warn(err);
     res.status(err.statusCode).send(err.message);
-  } else {
-    next(err);
+    return;
   }
+  next(err);
 };
 
 export const serverError = (
@@ -31,7 +31,7 @@ export const serverError = (
   console.error(err);
   if (process.env.NODE_ENV === "production") {
     res.status(500).send("Internal Server Error");
-  } else {
-    res.status(500).send(err.stack);
+    return;
   }
+  res.status(500).send(err.stack);
 };

@@ -14,7 +14,7 @@ async function list(req: Request, res: Response) {
       "user_id, display_name, country, points, RANK() OVER (ORDER BY points DESC) AS rank",
     )
     .orderBy("rank", "DESC")
-    .getMany();
+    .getRawMany();
 
   res.status(200).json(players);
 }
