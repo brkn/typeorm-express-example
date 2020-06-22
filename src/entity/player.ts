@@ -4,6 +4,7 @@ import {
   Column,
   Unique,
   PrimaryColumn,
+  Index,
 } from "typeorm";
 
 export interface PlayerParams {
@@ -14,6 +15,7 @@ export interface PlayerParams {
 }
 
 @Entity()
+@Index("rankings_index", {synchronize: false})
 @Unique("User_id has to be unique", ["user_id"])
 export class Player extends BaseEntity {
   @PrimaryColumn()
