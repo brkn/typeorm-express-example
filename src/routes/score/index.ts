@@ -16,4 +16,4 @@ const submit: Route = {
   },
 };
 
-export default [submit];
+export const scoreRoutes = [submit];

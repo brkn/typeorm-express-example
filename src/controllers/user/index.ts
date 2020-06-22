@@ -23,11 +23,11 @@ async function create(
     return;
   }
 
-  const player = new Player();
-  player.construct(payload);
+  const user = new Player();
+  user.construct(payload);
 
   try {
-    player.save();
+    await user.save();
     res
       .status(200)
       .json({success: "User created"});

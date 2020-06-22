@@ -31,7 +31,7 @@ async function submit(
 
   try {
     user.points += payload.score_worth;
-    user.save();
+    await user.save();
 
     res.status(200).json({
       success: "Score is added to user",
