@@ -129,11 +129,17 @@
 
 ## Local development
 
-1. Install dependencies
-   `yarn`
+1. Create dotenv file
 
-2. Run migrations
-   `yarn typeorm migrations:run`
+   - `cp .env.dev .env`
 
-3. Run server
-   `yarn dev`
+2. Install dependencies
+
+   - `yarn`
+
+3. Run migrations
+
+   - `yarn typeorm migrations:run`
+
+4. Run server
+   - `yarn dev`
