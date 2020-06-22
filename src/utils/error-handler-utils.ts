@@ -1,6 +1,5 @@
 import {
-  Response,
-  NextFunction,
+  Response, NextFunction
 } from "express";
 
 import {HTTPClientError} from "./http-error-models/client-error";
@@ -35,3 +34,5 @@ export const serverError = (
   }
   res.status(500).send(err.stack);
 };
+
+export class AlreadyExistsError extends Error {}

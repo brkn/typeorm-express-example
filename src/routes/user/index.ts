@@ -16,6 +16,17 @@ const create: Route = {
   },
 };
 
+const batchCreate: Route = {
+  path: "/user/create/batch",
+  method: "post",
+  handler: async (
+    req: Request,
+    res: Response,
+  ) => {
+    userController.batchCreate(req, res);
+  },
+};
+
 const get: Route = {
   path: "/user/profile/:user_id",
   method: "get",
@@ -29,5 +40,6 @@ const get: Route = {
 
 export const userRoutes = [
   create,
-  get
+  batchCreate,
+  get,
 ];

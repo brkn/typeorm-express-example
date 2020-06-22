@@ -14,6 +14,7 @@ export async function checkIfUserIdAlreadyExists(
   if (user) {
     res.status(400).send({
       Error: "user_id already exists",
+      user_id,
     });
     return true;
   }
