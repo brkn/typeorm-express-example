@@ -1,7 +1,9 @@
 /* eslint-disable no-restricted-syntax */
 /* eslint-disable no-await-in-loop */
 
-import {Request, Response} from "express";
+import {
+  Request, Response
+} from "express";
 import {getConnection} from "typeorm";
 
 import {

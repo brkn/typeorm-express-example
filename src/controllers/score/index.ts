@@ -23,7 +23,7 @@ async function submit(
   });
 
   if (!user) {
-    res.status(404).send({
+    res.status(404).json({
       Error: "This user doesn't exists",
     });
     return;

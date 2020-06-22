@@ -12,7 +12,7 @@ export async function checkIfUserIdAlreadyExists(
     where: {user_id},
   });
   if (user) {
-    res.status(400).send({
+    res.status(400).json({
       Error: "user_id already exists",
       user_id,
     });
