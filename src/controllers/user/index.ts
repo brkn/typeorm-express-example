@@ -30,7 +30,7 @@ async function create(
     await user.save();
     res
       .status(200)
-      .json({success: "User created"});
+      .json({success: "User created", user});
   } catch (error) {
     console.error(error);
     res
