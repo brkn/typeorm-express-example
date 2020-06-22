@@ -12,6 +12,13 @@ const prod = {
   cli: {
     migrationsDir: "src/migration",
   },
+
+  ssl: true,
+  extra: {
+    ssl: {
+      rejectUnauthorized: false,
+    },
+  },
 };
 const dev = {
   type: "postgres",
