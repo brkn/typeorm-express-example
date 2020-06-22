@@ -46,6 +46,7 @@ async function get(req: Request, res: Response) {
   const user = await userRepository.findOne({
     where: {user_id},
   });
+
   if (!user) {
     res.status(404).send({
       Error: "This user doesn't exists",
