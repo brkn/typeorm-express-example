@@ -5,12 +5,18 @@
   "main": "index.js",
   "scripts": {
     "dev": "tsc-watch --onSuccess \"node ./dist/server.js\" --onFailure \"echo Compilation Failed\" --compiler typescript/bin/tsc",
+    "build": "tsc --build tsconfig.json",
     "test": "jest --coverage --verbose",
     "typecheck": "echo \"type-checking...\" && tsc --noEmit",
-    "typeorm": "ts-node ./node_modules/.bin/typeorm"
+    "typeorm": "yarn build && ts-node ./node_modules/.bin/typeorm",
+    "heroku-postbuild": "yarn build && yarn typeorm migration:run",
+    "prod": "node ./dist/server.js"
   },
   "author": "brkn",
   "license": "MPL-2.0",
+  "engines": {
+    "node": "10.x"
+  },
   "jest": {
     "verbose": true,
     "transform": {
