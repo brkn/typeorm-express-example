@@ -61,10 +61,10 @@
 
   ```json
   {
-    "user_id": string,
-    "display_name": string,
-    "country": string,
-    "points": number
+    "user_id": "string",
+    "display_name": "string",
+    "country": "tr",
+    "points": 123.456
   }
   ```
 
@@ -77,16 +77,16 @@
   ```json
   [
     {
-      "user_id": string,
-      "display_name": string,
-      "country": string,
-      "points": number
+      "user_id": "string",
+      "display_name": "string",
+      "country": "string",
+      "points": 123.456
     },
     {
-      "user_id": string,
-      "display_name": string,
-      "country": string,
-      "points": number
+      "user_id": "string",
+      "display_name": "string",
+      "country": "string",
+      "points": 123.456
     }
   ]
   ```
