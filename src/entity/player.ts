@@ -5,7 +5,6 @@ import {
   Unique,
   PrimaryColumn,
 } from "typeorm";
-import {Min} from "class-validator";
 
 export interface PlayerParams {
   user_id: string;
@@ -26,8 +25,7 @@ export class Player extends BaseEntity {
   @Column()
   country!: string;
 
-  @Column("integer")
-  @Min(0)
+  @Column("double precision")
   points!: number;
 
   construct({
