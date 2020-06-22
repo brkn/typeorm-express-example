@@ -27,6 +27,17 @@ const batchCreate: Route = {
   },
 };
 
+const batchCreateRandom: Route = {
+  path: "/user/create/batch-random",
+  method: "post",
+  handler: async (
+    req: Request,
+    res: Response,
+  ) => {
+    userController.batchCreateRandom(req, res);
+  },
+};
+
 const get: Route = {
   path: "/user/profile/:user_id",
   method: "get",
@@ -41,5 +52,6 @@ const get: Route = {
 export const userRoutes = [
   create,
   batchCreate,
+  batchCreateRandom,
   get,
 ];

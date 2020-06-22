@@ -1,11 +1,8 @@
-/* eslint-disable no-restricted-syntax */
-/* eslint-disable no-await-in-loop */
 import {
   Request, Response
 } from "express";
 import {
   getRepository,
-  getConnection,
 } from "typeorm";
 
 import {
@@ -13,7 +10,11 @@ import {
   PlayerParams,
 } from "../../entity/player";
 import {checkIfUserIdAlreadyExists} from "../../utils/user-utils";
-import {AlreadyExistsError} from "../../utils/error-handler-utils";
+import {
+  saveBatchUsers,
+  saveBatchUsersSync,
+} from "./save-batch-users";
+import {generateRandomUsers} from "./generate-random-users";
 
 async function create(
   req: Request,
@@ -35,7 +36,7 @@ async function create(
   try {
     await user.save();
     res
-      .status(200)
+      .status(201)
       .json({success: "User created", user});
   } catch (error) {
     console.error(error);
@@ -49,52 +50,30 @@ async function batchCreate(
   req: Request,
   res: Response,
 ) {
-  const payload = req.body as PlayerParams[];
+  const playerParams = req.body as PlayerParams[];
 
-  const users = [] as Player[];
+  await saveBatchUsersSync(
+    req,
+    res,
+    playerParams,
+  );
+}
 
-  try {
-    await getConnection().transaction(
-      async (transactionalEntityManager) => {
-        for (const playerParams of payload) {
-          const isUserIdAlreadyExists = await checkIfUserIdAlreadyExists(
-            playerParams.user_id,
-            res,
-          );
-          if (isUserIdAlreadyExists) {
-            throw new AlreadyExistsError(
-              "This user already exists",
-            );
-          }
+async function batchCreateRandom(
+  req: Request,
+  res: Response,
+) {
+  const userCount = Number(req.body.count);
 
-          const user = new Player();
-          user.construct(playerParams);
+  const playerParams = generateRandomUsers(
+    userCount,
+  );
 
-          await transactionalEntityManager.save(
-            user,
-          );
-          users.push(user);
-        }
-      },
-    );
-  } catch (errorMessage) {
-    console.error(errorMessage);
-    if (
-      !(
-        errorMessage instanceof AlreadyExistsError
-      )
-    ) {
-      res.status(422).json({
-        error: "Something went wrong",
-        errorMessage,
-      }); // TODO: fix this error message and response status
-    }
-    return;
-  }
+  saveBatchUsers(playerParams);
 
-  res
-    .status(200)
-    .json({success: "Users are created", users});
+  res.status(202).json({
+    success: "Request is being processed",
+  });
 }
 
 async function get(req: Request, res: Response) {
@@ -106,7 +85,7 @@ async function get(req: Request, res: Response) {
   });
 
   if (!user) {
-    res.status(404).send({
+    res.status(404).json({
       Error: "This user doesn't exists",
     });
     return;
@@ -125,5 +104,6 @@ async function get(req: Request, res: Response) {
 export const userController = {
   create,
   batchCreate,
+  batchCreateRandom,
   get,
 };
